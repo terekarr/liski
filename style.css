@@ -488,6 +488,127 @@ body {
 .dash-stars  { font-size: .9rem; }
 .dash-status { font-size: .78rem; color: #9e8a7e; white-space: nowrap; font-weight: 700; }
 
+/* ── Blagues module ─────────────────────────────────────────────────────── */
+.btn-blagues {
+  border-color: #9B59FF;
+  color: #9B59FF;
+}
+.btn-blagues:hover { background: #f5f0ff; }
+
+.blague-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 22px 22px 20px;
+  box-shadow: var(--shadow);
+  width: 100%;
+  border: 3px solid #F0E0CC;
+}
+.blague-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+.blague-badge {
+  color: white;
+  font-weight: 900;
+  font-size: .85rem;
+  padding: 4px 14px;
+  border-radius: 50px;
+  letter-spacing: .3px;
+}
+.blague-counter {
+  font-size: .9rem;
+  font-weight: 800;
+  color: #9e8a7e;
+}
+.blague-question {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.7;
+  white-space: pre-line;
+  color: var(--text);
+}
+
+.btn-reveal {
+  background: linear-gradient(180deg, #C590FF 0%, #9B59FF 100%);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  font-family: var(--font);
+  cursor: pointer;
+  box-shadow: 0 6px 0 #6B29DF, 0 8px 20px rgba(100,40,220,.25);
+  transition: transform .12s, box-shadow .12s;
+  width: 100%;
+  max-width: 340px;
+  letter-spacing: .2px;
+}
+.btn-reveal:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 #6B29DF;
+}
+
+.blague-answer-wrap {
+  background: linear-gradient(135deg, #FFF9E6, #FFFBF0);
+  border: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 22px 22px;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+.blague-answer-wrap.visible {
+  display: block;
+  animation: answer-drop .45s cubic-bezier(.34,1.56,.64,1) both;
+}
+.blague-answer-emoji {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.blague-answer-text {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+@keyframes answer-drop {
+  from { transform: scale(.75) translateY(-12px); opacity: 0; }
+  to   { transform: scale(1)   translateY(0);     opacity: 1; }
+}
+
+.blague-nav {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 4px;
+}
+.btn-blague-nav {
+  background: var(--card);
+  border: 2.5px solid #E0CEC0;
+  border-radius: 50%;
+  width: 52px; height: 52px;
+  font-size: 1.3rem;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #d0beae;
+  font-family: var(--font);
+  transition: transform .1s, box-shadow .1s;
+  line-height: 1;
+}
+.btn-blague-nav:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 #d0beae;
+}
+.btn-blague-nav:disabled {
+  opacity: .3;
+  cursor: default;
+}
+
 /* ── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 380px) {
   .choice-btn { padding: 10px 4px; min-height: 76px; }

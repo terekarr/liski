@@ -378,6 +378,63 @@ function doReset() {
   buildDashboard();
 }
 
+// ── Blagues module ───────────────────────────────────────────────────────
+let _blagueIndex = 0;
+let _blagueRevealed = false;
+
+function showBlagues() {
+  _blagueIndex = 0;
+  renderBlague(0);
+  show('screen-blagues');
+}
+
+function renderBlague(index) {
+  const b = BLAGUES[index];
+  _blagueRevealed = false;
+
+  document.getElementById('blague-badge').textContent  = b.label;
+  document.getElementById('blague-badge').style.background = b.color;
+  document.getElementById('blague-counter').textContent = `${index + 1} / ${BLAGUES.length}`;
+  document.getElementById('blague-question').textContent = b.question;
+  document.getElementById('blague-answer-emoji').textContent = b.emoji;
+  document.getElementById('blague-answer-text').textContent  = b.answer;
+
+  document.getElementById('blague-answer-wrap').classList.remove('visible');
+  document.getElementById('btn-reveal').style.display = '';
+  document.getElementById('blague-speech').style.display = 'none';
+
+  document.getElementById('btn-blague-prev').disabled = index === 0;
+  document.getElementById('btn-blague-next').disabled = index === BLAGUES.length - 1;
+
+  setHogMood('hog-blagues', 'think');
+}
+
+function revealBlagueAnswer() {
+  if (_blagueRevealed) return;
+  _blagueRevealed = true;
+
+  const b = BLAGUES[_blagueIndex];
+  const isFunny = b.type === 'blague';
+
+  document.getElementById('btn-reveal').style.display = 'none';
+  document.getElementById('blague-answer-wrap').classList.add('visible');
+
+  setHogMood('hog-blagues', isFunny ? 'silly' : 'happy');
+
+  const speech = document.getElementById('blague-speech');
+  speech.textContent = b.reaction;
+  speech.style.display = 'block';
+
+  speakSilly(b.reaction, isFunny);
+}
+
+function nextBlague() {
+  if (_blagueIndex < BLAGUES.length - 1) renderBlague(++_blagueIndex);
+}
+function prevBlague() {
+  if (_blagueIndex > 0) renderBlague(--_blagueIndex);
+}
+
 // ── Misc ─────────────────────────────────────────────────────────────────────
 function shuffle(arr) {
   const a = [...arr];

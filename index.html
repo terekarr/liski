@@ -16,6 +16,7 @@
     </div>
     <p class="tagline">Prêt à lire avec Liski ?</p>
     <button class="btn-primary" onclick="showMap()">C'est parti !</button>
+    <button class="btn-secondary btn-blagues" onclick="showBlagues()">Lis des blagues !</button>
     <button class="btn-secondary" onclick="showDashboard()">Tableau des parents</button>
   </div>
 
@@ -62,6 +63,41 @@
     <button class="btn-primary" onclick="showMap()">Voir la carte</button>
   </div>
 
+  <!-- SCREEN: Blagues -->
+  <div id="screen-blagues" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="showWelcome()">←</button>
+      <h2>Liski et les blagues</h2>
+    </div>
+
+    <div class="blague-card">
+      <div class="blague-card-top">
+        <span class="blague-badge" id="blague-badge"></span>
+        <span class="blague-counter" id="blague-counter"></span>
+      </div>
+      <div class="blague-question" id="blague-question"></div>
+    </div>
+
+    <div class="mascot">
+      <div class="hedgehog" id="hog-blagues"></div>
+      <div class="speech-bubble" id="blague-speech"></div>
+    </div>
+
+    <button class="btn-reveal" id="btn-reveal" onclick="revealBlagueAnswer()">
+      Je donne ma langue au chat !
+    </button>
+
+    <div class="blague-answer-wrap" id="blague-answer-wrap">
+      <div class="blague-answer-emoji" id="blague-answer-emoji"></div>
+      <div class="blague-answer-text" id="blague-answer-text"></div>
+    </div>
+
+    <div class="blague-nav">
+      <button class="btn-blague-nav" id="btn-blague-prev" onclick="prevBlague()">←</button>
+      <button class="btn-blague-nav" id="btn-blague-next" onclick="nextBlague()">→</button>
+    </div>
+  </div>
+
   <!-- SCREEN: Dashboard -->
   <div id="screen-dashboard" class="screen">
     <div class="map-header">
@@ -72,6 +108,7 @@
   </div>
 
   <script src="data.js"></script>
+  <script src="blagues.js"></script>
   <script src="liski-svg.js"></script>
   <script src="game.js"></script>
 </body>
