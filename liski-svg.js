@@ -85,7 +85,7 @@ function _blush(mood) {
 // ── Island scene illustrations ────────────────────────────────────────────────
 
 function getIslandSVG(levelId) {
-  const scenes = [null, sceneOu, sceneOn, sceneAn, sceneAi, sceneOi, sceneEu, sceneEn, sceneIn, sceneAu, sceneUn];
+  const scenes = [null, sceneOu, sceneOn, sceneAn, sceneAi, sceneOi, sceneEu, sceneEn, sceneIn, sceneAu, sceneUn, scenePh, sceneGn, sceneIll, sceneEil, sceneOuill];
   return (scenes[levelId] || sceneDefault)();
 }
 
@@ -306,6 +306,182 @@ function sceneUn() {
     <circle cx="80" cy="66" r="3" fill="#E2D9F3" opacity="0.8"/>
     <circle cx="190" cy="58" r="3" fill="#E2D9F3" opacity="0.8"/>
     <circle cx="146" cy="82" r="2" fill="#E2D9F3" opacity="0.6"/>
+  </svg>`;
+}
+
+// ph — ocean with leaping dolphins
+function scenePh() {
+  return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g11" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#80DEEA"/><stop offset="100%" stop-color="#00ACC1"/></linearGradient></defs>
+    <rect width="280" height="110" fill="url(#g11)"/>
+    <circle cx="245" cy="22" r="18" fill="#FFF9C4" opacity="0.9"/>
+    <path d="M0,78Q40,65 80,78Q120,91 160,78Q200,65 240,78Q265,86 280,78L280,110L0,110Z" fill="#0097A7"/>
+    <path d="M0,90Q40,80 80,90Q120,100 160,90Q200,80 240,90L280,90L280,110L0,110Z" fill="#00838F"/>
+    <g transform="translate(80,60)">
+      <path d="M-20,10 Q-5,-15 15,-12 Q30,-8 28,5 Q15,18 -5,12 Z" fill="#00BCD4"/>
+      <path d="M-22,10 L-35,2 L-28,16 Z" fill="#00BCD4"/>
+      <circle cx="18" cy="-6" r="2.5" fill="#004D5A"/>
+      <circle cx="19" cy="-7" r="1" fill="white"/>
+    </g>
+    <g transform="translate(170,45)">
+      <path d="M-18,8 Q-4,-14 14,-10 Q28,-6 26,6 Q13,18 -4,10 Z" fill="#00BCD4"/>
+      <path d="M-20,8 L-32,1 L-26,14 Z" fill="#00BCD4"/>
+      <circle cx="16" cy="-4" r="2.5" fill="#004D5A"/>
+      <circle cx="17" cy="-5" r="1" fill="white"/>
+    </g>
+    <g transform="translate(130,72)">
+      <path d="M-14,6 Q-3,-10 10,-8 Q20,-4 19,4 Q9,12 -3,8 Z" fill="#26C6DA"/>
+      <path d="M-16,6 L-24,1 L-20,10 Z" fill="#26C6DA"/>
+    </g>
+    <!-- splashes -->
+    <path d="M68,62 Q72,55 76,62" stroke="white" stroke-width="2" fill="none" opacity="0.7"/>
+    <path d="M158,48 Q162,41 166,48" stroke="white" stroke-width="2" fill="none" opacity="0.7"/>
+  </svg>`;
+}
+
+// gn — mountain landscape
+function sceneGn() {
+  return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g12" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B0BEC5"/><stop offset="100%" stop-color="#78909C"/></linearGradient></defs>
+    <rect width="280" height="110" fill="url(#g12)"/>
+    <!-- Back mountains -->
+    <polygon points="0,110 60,30 130,110" fill="#607D8B"/>
+    <polygon points="50,110 140,15 230,110" fill="#546E7A"/>
+    <polygon points="150,110 220,28 280,110" fill="#607D8B"/>
+    <!-- Snow caps -->
+    <polygon points="60,30 48,55 72,55" fill="white" opacity="0.9"/>
+    <polygon points="140,15 124,46 156,46" fill="white" opacity="0.95"/>
+    <polygon points="220,28 208,52 232,52" fill="white" opacity="0.9"/>
+    <!-- Front hills (green) -->
+    <ellipse cx="40" cy="115" rx="80" ry="40" fill="#558B2F"/>
+    <ellipse cx="240" cy="118" rx="75" ry="36" fill="#558B2F"/>
+    <ellipse cx="140" cy="120" rx="100" ry="35" fill="#689F38"/>
+    <!-- Pine trees -->
+    <g transform="translate(22,72)">
+      <polygon points="0,-22 -10,0 10,0" fill="#2E7D32"/><rect x="-2" y="0" width="4" height="8" fill="#5D4037"/>
+    </g>
+    <g transform="translate(258,68)">
+      <polygon points="0,-20 -9,0 9,0" fill="#2E7D32"/><rect x="-2" y="0" width="4" height="7" fill="#5D4037"/>
+    </g>
+    <!-- Eagle -->
+    <path d="M200,35 Q210,28 220,35" stroke="#37474F" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>`;
+}
+
+// ill — butterfly meadow
+function sceneIll() {
+  return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8BBD0"/><stop offset="100%" stop-color="#CE93D8"/></linearGradient></defs>
+    <rect width="280" height="110" fill="url(#g13)"/>
+    <!-- Ground -->
+    <ellipse cx="140" cy="122" rx="180" ry="40" fill="#81C784"/>
+    <ellipse cx="140" cy="118" rx="180" ry="32" fill="#A5D6A7"/>
+    <!-- Flowers -->
+    ${[30,75,130,185,235].map((x,i)=>{const c=['#FF8A80','#FFD54F','#80DEEA','#CF94DA','#FF8A65'][i];return `<g transform="translate(${x},88)"><circle cx="0" cy="-8" r="7" fill="${c}" opacity="0.9"/><circle cx="0" cy="-14" r="5" fill="${c}"/><circle cx="5" cy="-10" r="5" fill="${c}"/><circle cx="-5" cy="-10" r="5" fill="${c}"/><circle cx="0" cy="-12" r="4" fill="#FFF9C4"/><rect x="-1.5" y="-4" width="3" height="16" rx="1.5" fill="#388E3C"/></g>`;}).join('')}
+    <!-- Butterflies -->
+    <g transform="translate(100,38)">
+      <path d="M0,0 Q-18,-20 -22,-5 Q-18,8 0,0" fill="#FF6B6B" opacity="0.9"/>
+      <path d="M0,0 Q18,-20 22,-5 Q18,8 0,0" fill="#FF6B6B" opacity="0.9"/>
+      <path d="M0,0 Q-12,12 -14,2 Q-10,-4 0,0" fill="#FF8A80" opacity="0.8"/>
+      <path d="M0,0 Q12,12 14,2 Q10,-4 0,0" fill="#FF8A80" opacity="0.8"/>
+      <ellipse cx="0" cy="0" rx="2" ry="6" fill="#5D1A00"/>
+    </g>
+    <g transform="translate(185,28)">
+      <path d="M0,0 Q-15,-17 -18,-4 Q-15,7 0,0" fill="#7986CB" opacity="0.9"/>
+      <path d="M0,0 Q15,-17 18,-4 Q15,7 0,0" fill="#7986CB" opacity="0.9"/>
+      <path d="M0,0 Q-10,10 -11,2 Q-8,-3 0,0" fill="#9FA8DA" opacity="0.8"/>
+      <path d="M0,0 Q10,10 11,2 Q8,-3 0,0" fill="#9FA8DA" opacity="0.8"/>
+      <ellipse cx="0" cy="0" rx="2" ry="5" fill="#311B92"/>
+    </g>
+    <g transform="translate(55,52)">
+      <path d="M0,0 Q-12,-14 -15,-3 Q-12,6 0,0" fill="#FFD54F" opacity="0.9"/>
+      <path d="M0,0 Q12,-14 15,-3 Q12,6 0,0" fill="#FFD54F" opacity="0.9"/>
+      <path d="M0,0 Q-8,8 -10,1 Q-7,-2 0,0" fill="#FFEE58" opacity="0.8"/>
+      <path d="M0,0 Q8,8 10,1 Q7,-2 0,0" fill="#FFEE58" opacity="0.8"/>
+      <ellipse cx="0" cy="0" rx="1.5" ry="5" fill="#4E342E"/>
+    </g>
+  </svg>`;
+}
+
+// eil — bright sunny day
+function sceneEil() {
+  return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g14" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/><stop offset="100%" stop-color="#FFB300"/></linearGradient></defs>
+    <rect width="280" height="110" fill="url(#g14)"/>
+    <!-- Sun rays -->
+    ${Array.from({length:12},(_,i)=>{const a=i*30*Math.PI/180,x1=140+46*Math.cos(a),y1=55+46*Math.sin(a),x2=140+70*Math.cos(a),y2=55+70*Math.sin(a);return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#FF8F00" stroke-width="4" stroke-linecap="round" opacity="0.7"/>`;}).join('')}
+    <!-- Sun body -->
+    <circle cx="140" cy="55" r="38" fill="#FFD700"/>
+    <circle cx="140" cy="55" r="30" fill="#FFE83D"/>
+    <circle cx="140" cy="55" r="22" fill="#FFF176"/>
+    <!-- Face on sun -->
+    <circle cx="132" cy="50" r="3.5" fill="#E65100"/>
+    <circle cx="148" cy="50" r="3.5" fill="#E65100"/>
+    <path d="M130,62 Q140,72 150,62" stroke="#E65100" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    <!-- Ground (yellow-green) -->
+    <path d="M0,92 Q70,82 140,92 Q210,102 280,92 L280,110 L0,110Z" fill="#F9A825"/>
+    <!-- Small hills/flowers -->
+    <ellipse cx="30" cy="108" rx="40" ry="20" fill="#F57F17" opacity="0.6"/>
+    <ellipse cx="250" cy="108" rx="40" ry="20" fill="#F57F17" opacity="0.6"/>
+    <!-- Sunbeam glitter -->
+    <circle cx="55"  cy="25" r="3" fill="#FFF9C4" opacity="0.8"/>
+    <circle cx="225" cy="18" r="2" fill="#FFF9C4" opacity="0.7"/>
+    <circle cx="80"  cy="15" r="2" fill="#FFF9C4" opacity="0.6"/>
+  </svg>`;
+}
+
+// ouill — frog pond with lily pads
+function sceneOuill() {
+  return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
+    <defs><linearGradient id="g15" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8E6C9"/><stop offset="100%" stop-color="#81C784"/></linearGradient></defs>
+    <rect width="280" height="110" fill="url(#g15)"/>
+    <!-- Pond -->
+    <ellipse cx="140" cy="80" rx="115" ry="38" fill="#1565C0" opacity="0.6"/>
+    <ellipse cx="140" cy="80" rx="110" ry="33" fill="#1976D2" opacity="0.5"/>
+    <!-- Water shimmer -->
+    <path d="M65,72 Q80,68 95,72" stroke="#90CAF9" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M170,76 Q185,72 200,76" stroke="#90CAF9" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <!-- Lily pads -->
+    <ellipse cx="90"  cy="82" rx="22" ry="12" fill="#2E7D32"/>
+    <path d="M90,82 L90,70" stroke="#2E7D32" stroke-width="1"/>
+    <ellipse cx="175" cy="78" rx="20" ry="11" fill="#388E3C"/>
+    <path d="M175,78 L175,67" stroke="#388E3C" stroke-width="1"/>
+    <ellipse cx="130" cy="90" rx="18" ry="9"  fill="#1B5E20"/>
+    <!-- Flowers on lily pads -->
+    <circle cx="90" cy="78" r="5" fill="#FF8A80"/>
+    <circle cx="90" cy="78" r="3" fill="#FFF9C4"/>
+    <circle cx="175" cy="74" r="4" fill="#F48FB1"/>
+    <circle cx="175" cy="74" r="2.5" fill="#FFF9C4"/>
+    <!-- Frog 1 (big, on pad) -->
+    <g transform="translate(90,70)">
+      <ellipse cx="0" cy="2" rx="11" ry="8" fill="#43A047"/>
+      <circle cx="0" cy="-4" r="8" fill="#43A047"/>
+      <circle cx="-4" cy="-7" r="4" fill="#66BB6A"/>
+      <circle cx="4"  cy="-7" r="4" fill="#66BB6A"/>
+      <circle cx="-4" cy="-7" r="2.5" fill="#1A0A00"/>
+      <circle cx="4"  cy="-7" r="2.5" fill="#1A0A00"/>
+      <circle cx="-3" cy="-8" r="1"   fill="white"/>
+      <circle cx="5"  cy="-8" r="1"   fill="white"/>
+      <path d="M-3,0 Q0,3 3,0" stroke="#1B5E20" stroke-width="1.5" fill="none"/>
+    </g>
+    <!-- Frog 2 (small, peeping from water) -->
+    <g transform="translate(175,68)">
+      <circle cx="0" cy="0" r="7" fill="#558B2F"/>
+      <circle cx="-3" cy="-2" r="3" fill="#7CB342"/>
+      <circle cx="3"  cy="-2" r="3" fill="#7CB342"/>
+      <circle cx="-3" cy="-2" r="1.8" fill="#1A0A00"/>
+      <circle cx="3"  cy="-2" r="1.8" fill="#1A0A00"/>
+    </g>
+    <!-- Reeds -->
+    <rect x="30" y="55" width="3" height="45" rx="1.5" fill="#5D4037"/>
+    <ellipse cx="31" cy="53" rx="4" ry="10" fill="#795548"/>
+    <rect x="248" y="58" width="3" height="42" rx="1.5" fill="#5D4037"/>
+    <ellipse cx="249" cy="56" rx="3.5" ry="9" fill="#795548"/>
   </svg>`;
 }
 
