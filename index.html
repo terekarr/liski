@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Liski lit les mots</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SCREEN: Welcome -->
+  <div id="screen-welcome" class="screen active">
+    <h1>Liski lit les mots</h1>
+    <div id="mascot-welcome" class="mascot">
+      <div class="hedgehog" id="hog-welcome"></div>
+    </div>
+    <p class="tagline">Prêt à lire avec Liski ?</p>
+    <button class="btn-primary" onclick="showMap()">C'est parti !</button>
+    <button class="btn-secondary" onclick="showDashboard()">Tableau des parents</button>
+  </div>
+
+  <!-- SCREEN: Map -->
+  <div id="screen-map" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="showWelcome()">←</button>
+      <h2>La carte des îles</h2>
+      <div class="stars-total"><span id="stars-display">⭐ 0</span></div>
+    </div>
+    <div id="island-map" class="island-map"></div>
+  </div>
+
+  <!-- SCREEN: Level intro -->
+  <div id="screen-level-intro" class="screen">
+    <div class="hedgehog" id="hog-intro"></div>
+    <h2 id="intro-title"></h2>
+    <div class="sound-badge" id="intro-sound"></div>
+    <p id="intro-desc"></p>
+    <button class="btn-primary" onclick="startLevel()">Jouer !</button>
+    <button class="btn-back-sm" onclick="showMap()">← Carte</button>
+  </div>
+
+  <!-- SCREEN: Activity -->
+  <div id="screen-activity" class="screen">
+    <div class="activity-header">
+      <button class="btn-back" onclick="confirmBackToMap()">←</button>
+      <div class="progress-bar-wrap"><div id="progress-bar" class="progress-bar"></div></div>
+      <div class="lives" id="lives-display"></div>
+    </div>
+    <div id="mascot-activity" class="mascot mascot-sm">
+      <div class="hedgehog" id="hog-activity"></div>
+      <div class="speech-bubble" id="speech-bubble"></div>
+    </div>
+    <div id="activity-area"></div>
+  </div>
+
+  <!-- SCREEN: Level complete -->
+  <div id="screen-level-complete" class="screen">
+    <div class="hedgehog hog-happy" id="hog-complete"></div>
+    <h2 id="complete-title">Bravo !</h2>
+    <div class="stars-earned" id="stars-earned"></div>
+    <p id="complete-msg"></p>
+    <button class="btn-primary" onclick="showMap()">Voir la carte</button>
+  </div>
+
+  <!-- SCREEN: Dashboard -->
+  <div id="screen-dashboard" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="showWelcome()">←</button>
+      <h2>Tableau des parents</h2>
+    </div>
+    <div id="dashboard-content"></div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="liski-svg.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>
