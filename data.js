@@ -226,3 +226,6 @@ const LEVELS = [
     ]
   },
 ];
+
+// Complete word list with pictures (emoji) for the activities
+// Each word entry: { word, emoji, hint, sound (which level sound it belongs to) }

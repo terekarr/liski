@@ -326,7 +326,7 @@ function hideSpeech() { document.getElementById('speech-bubble').style.display =
 function setHogMood(id, mood) {
   const el = document.getElementById(id);
   if (!el) return;
-  el.className = 'hedgehog hog-' + mood;
+  el.className = 'hedgehog';
   el.innerHTML = getLiskiSVG(mood);
 }
 

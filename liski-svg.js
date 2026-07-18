@@ -1,85 +1,136 @@
 // ── Liski SVG hedgehog character ─────────────────────────────────────────────
-
-let _hogId = 0;
+// One body (feet + torso + spikes + head + snout), three warm, always-friendly
+// moods: encouraging (default), celebrating (right answer), curious (thinking /
+// gentle retry). No mood is ever mocking — only the pose and props change.
 
 function getLiskiSVG(mood = 'normal') {
-  const id = ++_hogId;
-  const bg = `hbg${id}`, bl = `hbl${id}`;
-  return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">
-    <defs>
-      <radialGradient id="${bg}" cx="38%" cy="32%">
-        <stop offset="0%" stop-color="#D4975A"/>
-        <stop offset="100%" stop-color="#7B4A26"/>
-      </radialGradient>
-      <radialGradient id="${bl}" cx="50%" cy="28%">
-        <stop offset="0%" stop-color="#FAE3C0"/>
-        <stop offset="100%" stop-color="#F0C898"/>
-      </radialGradient>
-    </defs>
-    ${_spines()}
-    <ellipse cx="100" cy="130" rx="68" ry="54" fill="#6B3D1E"/>
-    <circle cx="100" cy="108" r="66" fill="url(#${bg})"/>
-    <ellipse cx="100" cy="150" rx="42" ry="32" fill="url(#${bl})"/>
-    ${_eyes(mood)}
-    <ellipse cx="100" cy="120" rx="10" ry="7.5" fill="#D97B7B"/>
-    <ellipse cx="99" cy="118" rx="3.5" ry="2" fill="#F5B5B5" opacity="0.7"/>
-    ${_mouth(mood)}
-    ${_blush(mood)}
+  if (mood === 'happy' || mood === 'excited') return _hogCelebrating();
+  if (mood === 'think' || mood === 'silly')   return _hogCurious();
+  return _hogEncouraging();
+}
+
+function _hogQuills(bgRotY, fgRotY) {
+  return `
+    <g stroke-linecap="round" fill="none" stroke="var(--primary-dk)">
+      <line x1="120" y1="112" x2="120" y2="78" stroke-width="10" transform="rotate(-85 120 148)"/>
+      <line x1="120" y1="112" x2="120" y2="67" stroke-width="10" transform="rotate(-55 120 148)"/>
+      <line x1="120" y1="112" x2="120" y2="62" stroke-width="10" transform="rotate(-25 120 148)"/>
+      <line x1="120" y1="112" x2="120" y2="61" stroke-width="10" transform="rotate(10 120 148)"/>
+      <line x1="120" y1="112" x2="120" y2="64" stroke-width="10" transform="rotate(40 120 148)"/>
+      <line x1="120" y1="112" x2="120" y2="72" stroke-width="10" transform="rotate(70 120 148)"/>
+    </g>
+    <g stroke-linecap="round" fill="none" stroke="var(--ink)">
+      <line x1="120" y1="104" x2="120" y2="64" stroke-width="8" transform="rotate(-92 120 140)"/>
+      <line x1="120" y1="104" x2="120" y2="49" stroke-width="8" transform="rotate(-60 120 140)"/>
+      <line x1="120" y1="104" x2="120" y2="38" stroke-width="8" transform="rotate(0 120 140)"/>
+      <line x1="120" y1="104" x2="120" y2="49" stroke-width="8" transform="rotate(60 120 140)"/>
+      <line x1="120" y1="104" x2="120" y2="64" stroke-width="8" transform="rotate(92 120 140)"/>
+    </g>`;
+}
+
+function _hogBodyQuills() {
+  return `
+    <g stroke-linecap="round" fill="none" stroke="var(--primary-dk)">
+      <line x1="70" y1="220" x2="46" y2="206" stroke-width="9"/>
+      <line x1="66" y1="232" x2="40" y2="226" stroke-width="9"/>
+      <line x1="66" y1="244" x2="42" y2="250" stroke-width="9"/>
+      <line x1="170" y1="220" x2="194" y2="206" stroke-width="9"/>
+      <line x1="174" y1="232" x2="200" y2="226" stroke-width="9"/>
+      <line x1="174" y1="244" x2="198" y2="250" stroke-width="9"/>
+    </g>
+    <g stroke-linecap="round" fill="none" stroke="var(--ink)">
+      <line x1="74" y1="216" x2="54" y2="198" stroke-width="7"/>
+      <line x1="70" y1="230" x2="46" y2="220" stroke-width="7"/>
+      <line x1="70" y1="242" x2="48" y2="252" stroke-width="7"/>
+      <line x1="166" y1="216" x2="186" y2="198" stroke-width="7"/>
+      <line x1="170" y1="230" x2="194" y2="220" stroke-width="7"/>
+      <line x1="170" y1="242" x2="192" y2="252" stroke-width="7"/>
+    </g>`;
+}
+
+function _hogHead(browPath1, browPath2) {
+  return `
+    <circle cx="120" cy="118" r="54" fill="var(--primary)"/>
+    ${_hogQuills()}
+    <ellipse cx="80" cy="96" rx="10" ry="12" fill="var(--primary-dk)" transform="rotate(-16 80 96)"/>
+    <ellipse cx="160" cy="96" rx="10" ry="12" fill="var(--primary-dk)" transform="rotate(16 160 96)"/>
+    <path d="M96,150 Q90,168 100,182 Q109,192 120,193 Q131,192 140,182 Q150,168 144,150 Q132,142 120,142 Q108,142 96,150 Z" fill="var(--muzzle)"/>
+    <path d="${browPath1}" stroke="var(--primary-dk)" stroke-width="2.7" fill="none" stroke-linecap="round"/>
+    <path d="${browPath2}" stroke="var(--primary-dk)" stroke-width="2.7" fill="none" stroke-linecap="round"/>`;
+}
+
+function _hogEncouraging() {
+  return `<svg viewBox="0 0 240 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">
+    <g class="hog-idle">
+      <ellipse cx="94" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="146" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="120" cy="204" rx="58" ry="64" fill="var(--primary)"/>
+      <ellipse cx="120" cy="218" rx="38" ry="42" fill="var(--muzzle)"/>
+      ${_hogBodyQuills()}
+      <ellipse cx="168" cy="206" rx="13" ry="20" fill="var(--primary-dk)" transform="rotate(16 168 206)"/>
+      <ellipse cx="72" cy="206" rx="13" ry="20" fill="var(--primary-dk)" transform="rotate(-16 72 206)"/>
+      ${_hogHead('M91,112 Q102,106 112,111', 'M128,111 Q138,106 149,112')}
+      <g class="hog-blink">
+        <circle cx="102" cy="133" r="7.5" fill="var(--ink)"/><circle cx="104.8" cy="130.3" r="2.6" fill="#fdf1de"/>
+        <circle cx="138" cy="133" r="7.5" fill="var(--ink)"/><circle cx="140.8" cy="130.3" r="2.6" fill="#fdf1de"/>
+      </g>
+      <path d="M95,139 Q102,143 109,139" stroke="var(--ink)" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+      <path d="M131,139 Q138,143 145,139" stroke="var(--ink)" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".4"/>
+      <circle cx="90" cy="144" r="7" fill="var(--blush)" opacity=".6"/>
+      <circle cx="150" cy="144" r="7" fill="var(--blush)" opacity=".6"/>
+      <ellipse cx="120" cy="172" rx="7" ry="5" fill="var(--ink)"/>
+      <path d="M100,178 Q120,196 140,178" stroke="var(--ink)" stroke-width="3" fill="#fdf3e4" stroke-linecap="round"/>
+      <path d="M100,178 Q120,196 140,178" stroke="var(--ink)" stroke-width="2.5" fill="none"/>
+    </g>
   </svg>`;
 }
 
-function _spines() {
-  const qs = [[0,9,25],[25,8,22],[-25,8,22],[50,7,19],[-50,7,19],[72,6,16],[-72,6,16],[90,5,13],[-90,5,13]];
-  return `<g fill="#3D1F08">` +
-    qs.map(([a,rx,ry]) =>
-      `<ellipse cx="100" cy="40" rx="${rx}" ry="${ry}" transform="rotate(${a} 100 110)"/>`
-    ).join('') + `</g>`;
+function _hogCelebrating() {
+  return `<svg viewBox="0 0 240 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">
+    <path class="hog-sparkle-a" d="M52,90 l4,12 l12,4 l-12,4 l-4,12 l-4,-12 l-12,-4 l12,-4 Z" fill="var(--primary-dk)"/>
+    <path class="hog-sparkle-b" d="M196,120 l3,9 l9,3 l-9,3 l-3,9 l-3,-9 l-9,-3 l9,-3 Z" fill="var(--primary-dk)"/>
+    <path class="hog-sparkle-a" style="animation-delay:.4s" d="M186,70 l3,8 l8,3 l-8,3 l-3,8 l-3,-8 l-8,-3 l8,-3 Z" fill="var(--blush)"/>
+    <g class="hog-celebrate">
+      <ellipse cx="94" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="146" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="120" cy="204" rx="58" ry="64" fill="var(--primary)"/>
+      <ellipse cx="120" cy="218" rx="38" ry="42" fill="var(--muzzle)"/>
+      ${_hogBodyQuills()}
+      <g class="hog-arm-l"><ellipse cx="60" cy="176" rx="13" ry="22" fill="var(--primary-dk)" transform="rotate(-55 60 176)"/></g>
+      <g class="hog-arm-r"><ellipse cx="180" cy="176" rx="13" ry="22" fill="var(--primary-dk)" transform="rotate(55 180 176)"/></g>
+      ${_hogHead('M89,110 Q102,100 115,110', 'M125,110 Q138,100 151,110')}
+      <path d="M94,133 Q102,124 110,133" stroke="var(--ink)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <path d="M130,133 Q138,124 146,133" stroke="var(--ink)" stroke-width="5.5" fill="none" stroke-linecap="round"/>
+      <circle cx="88" cy="140" r="8" fill="var(--blush)" opacity=".8"/>
+      <circle cx="152" cy="140" r="8" fill="var(--blush)" opacity=".8"/>
+      <ellipse cx="120" cy="166" rx="6.5" ry="5" fill="var(--ink)"/>
+      <path d="M96,182 Q96,204 120,215 Q144,204 144,182 Q120,197 96,182 Z" fill="var(--ink)"/>
+      <ellipse cx="120" cy="200" rx="15" ry="10" fill="#fdf3e4"/>
+    </g>
+  </svg>`;
 }
 
-function _eyes(mood) {
-  const lx=78, rx=122, ey=102, r=14;
-  if (mood === 'happy') return `
-    <path d="M${lx-14},${ey+1}Q${lx},${ey-13}${lx+14},${ey+1}" stroke="#1A0A00" stroke-width="5.5" fill="none" stroke-linecap="round"/>
-    <path d="M${rx-14},${ey+1}Q${rx},${ey-13}${rx+14},${ey+1}" stroke="#1A0A00" stroke-width="5.5" fill="none" stroke-linecap="round"/>`;
-  if (mood === 'silly') return `
-    <path d="M${lx-12},${ey}Q${lx},${ey-10}${lx+12},${ey}" stroke="#1A0A00" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <circle cx="${rx}" cy="${ey}" r="${r+2}" fill="#1A0A00"/>
-    <circle cx="${rx+5}" cy="${ey-6}" r="6" fill="white"/>`;
-  if (mood === 'think') return `
-    <circle cx="${lx}" cy="${ey}" r="${r}" fill="#1A0A00"/><circle cx="${lx+1}" cy="${ey-8}" r="5" fill="white"/>
-    <circle cx="${rx}" cy="${ey}" r="${r}" fill="#1A0A00"/><circle cx="${rx+1}" cy="${ey-8}" r="5" fill="white"/>`;
-  if (mood === 'excited' || mood === 'speak') return `
-    <circle cx="${lx}" cy="${ey}" r="${r+2}" fill="#1A0A00"/><circle cx="${lx+5}" cy="${ey-6}" r="6.5" fill="white"/>
-    <circle cx="${rx}" cy="${ey}" r="${r+2}" fill="#1A0A00"/><circle cx="${rx+5}" cy="${ey-6}" r="6.5" fill="white"/>`;
-  return `
-    <circle cx="${lx}" cy="${ey}" r="${r}" fill="#1A0A00"/><circle cx="${lx+4}" cy="${ey-5}" r="5.5" fill="white"/>
-    <circle cx="${rx}" cy="${ey}" r="${r}" fill="#1A0A00"/><circle cx="${rx+4}" cy="${ey-5}" r="5.5" fill="white"/>`;
-}
-
-function _mouth(mood) {
-  if (mood === 'happy' || mood === 'excited') return `
-    <path d="M78,126Q100,148 122,126" stroke="#7a3a2a" stroke-width="3" fill="white" stroke-linecap="round"/>
-    <path d="M78,126Q100,148 122,126" stroke="#7a3a2a" stroke-width="2.5" fill="none"/>
-    <line x1="91" y1="131" x2="91" y2="138" stroke="#c0806a" stroke-width="2"/>
-    <line x1="100" y1="133" x2="100" y2="140" stroke="#c0806a" stroke-width="2"/>
-    <line x1="109" y1="131" x2="109" y2="138" stroke="#c0806a" stroke-width="2"/>`;
-  if (mood === 'silly') return `
-    <path d="M80,126Q100,142 120,126" stroke="#7a3a2a" stroke-width="3" fill="white" stroke-linecap="round"/>
-    <ellipse cx="100" cy="139" rx="12" ry="8" fill="#FF9999"/>
-    <line x1="100" y1="131" x2="100" y2="147" stroke="#E07070" stroke-width="1.5"/>`;
-  if (mood === 'speak') return `
-    <ellipse cx="100" cy="132" rx="13" ry="10" fill="#7a3a2a"/>
-    <ellipse cx="100" cy="133" rx="8" ry="6" fill="#C45E5E"/>`;
-  if (mood === 'think') return `
-    <path d="M88,130Q97,128 106,130Q113,132 118,129" stroke="#7a3a2a" stroke-width="3" fill="none" stroke-linecap="round"/>`;
-  return `<path d="M84,127Q100,142 116,127" stroke="#7a3a2a" stroke-width="3" fill="none" stroke-linecap="round"/>`;
-}
-
-function _blush(mood) {
-  const op = (mood === 'silly' || mood === 'happy' || mood === 'excited') ? 0.6 : 0.38;
-  const r  = (mood === 'happy' || mood === 'excited') ? 15 : 12;
-  return `<circle cx="57" cy="114" r="${r}" fill="#FFB5B5" opacity="${op}"/>
-    <circle cx="143" cy="114" r="${r}" fill="#FFB5B5" opacity="${op}"/>`;
+function _hogCurious() {
+  return `<svg viewBox="0 0 240 290" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;overflow:visible">
+    <g class="hog-curbob">
+      <ellipse cx="94" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="146" cy="254" rx="15" ry="11" fill="var(--primary-dk)"/>
+      <ellipse cx="120" cy="204" rx="58" ry="64" fill="var(--primary)"/>
+      <ellipse cx="120" cy="218" rx="38" ry="42" fill="var(--muzzle)"/>
+      ${_hogBodyQuills()}
+      <ellipse cx="168" cy="206" rx="13" ry="20" fill="var(--primary-dk)" transform="rotate(16 168 206)"/>
+      <g class="hog-chin"><ellipse cx="86" cy="180" rx="13" ry="22" fill="var(--primary-dk)" transform="rotate(-45 86 180)"/></g>
+      <g transform="rotate(-8 120 118)">
+        ${_hogHead('M91,116 Q102,104 112,111', 'M128,111 Q138,106 149,112')}
+        <circle cx="102" cy="133" r="7.5" fill="var(--ink)"/><circle cx="105.2" cy="130.1" r="2.6" fill="#fdf1de"/>
+        <circle cx="138" cy="133" r="7.5" fill="var(--ink)"/><circle cx="141.2" cy="130.1" r="2.6" fill="#fdf1de"/>
+        <circle cx="90" cy="144" r="7" fill="var(--blush)" opacity=".55"/>
+        <circle cx="150" cy="144" r="7" fill="var(--blush)" opacity=".55"/>
+        <ellipse cx="120" cy="172" rx="7" ry="5" fill="var(--ink)"/>
+        <path d="M108,180 Q120,186 132,180" stroke="var(--ink)" stroke-width="2.3" fill="none" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>`;
 }
 
 // ── Island scene illustrations ────────────────────────────────────────────────
@@ -309,7 +360,6 @@ function sceneUn() {
   </svg>`;
 }
 
-// ph — ocean with leaping dolphins
 function scenePh() {
   return `<svg viewBox="0 0 280 110" xmlns="http://www.w3.org/2000/svg">
     <defs><linearGradient id="g11" x1="0" y1="0" x2="0" y2="1">

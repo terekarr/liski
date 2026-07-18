@@ -16,6 +16,9 @@
   --radius:     22px;
   --shadow:     0 6px 24px rgba(80,40,0,.12);
   --font:       'Nunito', 'Arial Rounded MT Bold', sans-serif;
+  --ink:        #3D2414;
+  --muzzle:     #FFF6E9;
+  --blush:      #FFB199;
 }
 
 body {
@@ -153,18 +156,26 @@ body {
 }
 .hedgehog svg { width: 100%; height: 100%; }
 
-/* Mood animations */
-.hog-happy   { animation: hog-bounce .5s ease infinite alternate; }
-.hog-excited { animation: hog-wiggle .4s ease infinite; }
-.hog-silly   { animation: hog-spin .5s ease; }
-.hog-speak   { animation: hog-nod .55s ease infinite alternate; }
-.hog-curious { transform: rotate(-12deg); }
-.hog-think   { transform: rotate(10deg); }
+/* Mood animations — Liski always reads friendly; only the pose/props change */
+.hog-idle     { animation: hogIdleBob 2.4s ease-in-out infinite; transform-box: fill-box; }
+.hog-curbob   { animation: hogCurBob 3s ease-in-out infinite; transform-box: fill-box; }
+.hog-celebrate{ animation: hogCelebrate 1s ease-in-out infinite; transform-box: fill-box; }
+.hog-blink    { animation: hogBlink 3.6s ease-in-out infinite; transform-box: fill-box; transform-origin: 50% 50%; }
+.hog-arm-l    { animation: hogArmL .5s ease-in-out infinite; transform-box: fill-box; transform-origin: 20% 90%; }
+.hog-arm-r    { animation: hogArmR .5s ease-in-out infinite; transform-box: fill-box; transform-origin: 80% 90%; }
+.hog-chin     { animation: hogChinTap 2.8s ease-in-out infinite; transform-box: fill-box; transform-origin: 80% 10%; }
+.hog-sparkle-a{ animation: hogSparkleA 1.1s ease-in-out infinite; }
+.hog-sparkle-b{ animation: hogSparkleB 1.3s ease-in-out infinite .2s; }
 
-@keyframes hog-bounce { from { transform: translateY(0) scale(1); }    to   { transform: translateY(-14px) scale(1.06); } }
-@keyframes hog-wiggle { 0%,100% { transform: rotate(-8deg); }          50%  { transform: rotate(8deg); } }
-@keyframes hog-spin   { 0% { transform: rotate(0) scale(1); }          40%  { transform: rotate(-22deg) scale(1.14); } 100% { transform: rotate(0) scale(1); } }
-@keyframes hog-nod    { from { transform: translateY(0) rotate(-5deg);} to   { transform: translateY(-10px) rotate(5deg); } }
+@keyframes hogIdleBob  { 0%,60%,100% { transform: translateY(0); } 80% { transform: translateY(-5px); } }
+@keyframes hogCurBob   { 0%,60%,100% { transform: translateY(0); } 80% { transform: translateY(-3px); } }
+@keyframes hogCelebrate{ 0%,100% { transform: translateY(0) scale(1,1); } 30% { transform: translateY(-14px) scale(.97,1.05); } 50% { transform: translateY(-20px) scale(1.04,.96); } 70% { transform: translateY(-14px) scale(.97,1.05); } }
+@keyframes hogBlink    { 0%,88%,100% { transform: scaleY(1); } 92% { transform: scaleY(.1); } 96% { transform: scaleY(1); } }
+@keyframes hogArmL     { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(-8deg); } }
+@keyframes hogArmR     { 0%,100% { transform: rotate(0deg); } 50% { transform: rotate(8deg); } }
+@keyframes hogChinTap  { 0%,40%,100% { transform: rotate(0deg); } 65% { transform: rotate(-10deg); } }
+@keyframes hogSparkleA { 0%,100% { opacity: .2; transform: scale(.6) rotate(0deg); } 50% { opacity: 1; transform: scale(1.1) rotate(20deg); } }
+@keyframes hogSparkleB { 0%,100% { opacity: 1; transform: scale(1) rotate(0deg); } 50% { opacity: .25; transform: scale(.6) rotate(-20deg); } }
 
 .speech-bubble {
   background: white;

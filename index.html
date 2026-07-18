@@ -16,8 +16,8 @@
     </div>
     <p class="tagline">Prêt à lire avec Liski ?</p>
     <button class="btn-primary" onclick="showMap()">C'est parti !</button>
-    <button class="btn-secondary btn-blagues" onclick="showBlagues()">Lis des blagues !</button>
     <button class="btn-secondary" onclick="showDashboard()">Tableau des parents</button>
+    <button class="btn-secondary btn-blagues" onclick="showBlagues()">Lis des blagues !</button>
   </div>
 
   <!-- SCREEN: Map -->
@@ -63,6 +63,15 @@
     <button class="btn-primary" onclick="showMap()">Voir la carte</button>
   </div>
 
+  <!-- SCREEN: Dashboard -->
+  <div id="screen-dashboard" class="screen">
+    <div class="map-header">
+      <button class="btn-back" onclick="showWelcome()">←</button>
+      <h2>Tableau des parents</h2>
+    </div>
+    <div id="dashboard-content"></div>
+  </div>
+
   <!-- SCREEN: Blagues -->
   <div id="screen-blagues" class="screen">
     <div class="map-header">
@@ -98,18 +107,9 @@
     </div>
   </div>
 
-  <!-- SCREEN: Dashboard -->
-  <div id="screen-dashboard" class="screen">
-    <div class="map-header">
-      <button class="btn-back" onclick="showWelcome()">←</button>
-      <h2>Tableau des parents</h2>
-    </div>
-    <div id="dashboard-content"></div>
-  </div>
-
   <script src="data.js"></script>
-  <script src="blagues.js"></script>
   <script src="liski-svg.js"></script>
   <script src="game.js"></script>
+  <script src="blagues.js"></script>
 </body>
 </html>
